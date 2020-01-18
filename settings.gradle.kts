@@ -1,5 +1,6 @@
 include(
     ":app",
+    ":feature:repos",
     ":domain:use_case",
     ":data:api"
 )
