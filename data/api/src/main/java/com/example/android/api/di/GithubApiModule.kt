@@ -24,10 +24,6 @@ object GithubApiModule {
     }
 }
 
-interface GitHubRepoApi {
-    fun fetchRepos(): Repo
-}
-
 data class Repo(
     val aaa: String
 )
