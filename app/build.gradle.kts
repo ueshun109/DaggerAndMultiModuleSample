@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
 }
 
 android {
@@ -27,6 +28,7 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
+    implementation(project("path" to ":data:api"))
 
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
@@ -36,4 +38,17 @@ dependencies {
     // AndroidX
     implementation(Dep.AndroidX.appCompat)
     implementation(Dep.AndroidX.coreKtx)
+    implementation(Dep.AndroidX.constraintLayout)
+
+    // Dagger2
+    implementation(Dep.Dagger.dagger)
+    implementation(Dep.Dagger.support)
+    kapt(Dep.Dagger.compiler)
+
+    // Moshi
+    implementation(Dep.Moshi.moshi)
+    implementation(Dep.Moshi.kotlin)
+
+    // Retrofit
+    implementation(Dep.Retrofit.logging)
 }

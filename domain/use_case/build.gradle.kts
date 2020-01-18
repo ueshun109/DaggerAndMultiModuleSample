@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
 }
 android {
     compileSdkVersion(29)
@@ -29,6 +30,7 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to  listOf("*.jar")))
+    implementation(project("path" to ":data:api"))
 
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
@@ -38,6 +40,11 @@ dependencies {
     // AndroidX
     implementation(Dep.AndroidX.appCompat)
     implementation(Dep.AndroidX.coreKtx)
+
+    // Dagger2
+    implementation(Dep.Dagger.dagger)
+    implementation(Dep.Dagger.support)
+    kapt(Dep.Dagger.compiler)
 
     // Test
     testImplementation(Dep.Test.junit4)
