@@ -1,5 +1,6 @@
 include(
-        ":app",
-        ":domain:use_case"
+    ":app",
+    ":domain:use_case",
+    ":data:api"
 )
 rootProject.name = "DaggerAndMultiModuleSample"

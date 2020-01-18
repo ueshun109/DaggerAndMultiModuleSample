@@ -1,22 +1,24 @@
 import dependencies.Dep
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
 }
-
 android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.2")
+
     defaultConfig {
-        applicationId = "com.example.android.daggerandmultimodulesample"
         minSdkVersion(26)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -26,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
+    implementation(fileTree("dir" to "libs", "include" to  listOf("*.jar")))
 
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
@@ -36,4 +38,8 @@ dependencies {
     // AndroidX
     implementation(Dep.AndroidX.appCompat)
     implementation(Dep.AndroidX.coreKtx)
+
+    // Test
+    testImplementation(Dep.Test.junit4)
+    testImplementation(Dep.Test.assertJ)
 }
