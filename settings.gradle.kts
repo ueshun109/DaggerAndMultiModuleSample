@@ -1,4 +1,5 @@
 include(
-    ":app"
+        ":app",
+        ":domain:use_case"
 )
-rootProject.name="DaggerAndMultiModuleSample"
+rootProject.name = "DaggerAndMultiModuleSample"
