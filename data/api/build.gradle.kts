@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
 }
 android {
     compileSdkVersion(29)
@@ -38,6 +39,20 @@ dependencies {
     // AndroidX
     implementation(Dep.AndroidX.appCompat)
     implementation(Dep.AndroidX.coreKtx)
+
+    // Dagger2
+    implementation(Dep.Dagger.dagger)
+    implementation(Dep.Dagger.support)
+    kapt(Dep.Dagger.compiler)
+
+    // Moshi
+    implementation(Dep.Moshi.moshi)
+    implementation(Dep.Moshi.kotlin)
+
+    // Retrofit
+    implementation(Dep.Retrofit.retrofit)
+    implementation(Dep.Retrofit.converter)
+    implementation(Dep.Retrofit.logging)
 
     // Test
     testImplementation(Dep.Test.junit4)
