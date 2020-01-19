@@ -28,6 +28,8 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
+    implementation(project("path" to ":feature:repos"))
+    implementation(project("path" to ":domain:use_case"))
     implementation(project("path" to ":data:api"))
 
     // Kotlin
