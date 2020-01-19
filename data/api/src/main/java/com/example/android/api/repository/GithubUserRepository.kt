@@ -1,12 +1,12 @@
 package com.example.android.repository
 
-import com.example.android.api.GitHubRepoApi
+import com.example.android.api.GitHubMyProfileApi
 import javax.inject.Inject
 
 class GithubUserRepository @Inject constructor(
-    private val gitHubRepoApi: GitHubRepoApi
+    private val gitHubRepoApi: GitHubMyProfileApi
 ) {
     fun fetchUser() {
-        gitHubRepoApi.fetchRepos()
+        gitHubRepoApi.fetchMyProfile()
     }
 }
