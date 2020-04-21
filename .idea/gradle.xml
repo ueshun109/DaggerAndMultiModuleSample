@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/domain/use_case" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/repos" />
+            <option value="$PROJECT_DIR$/model" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

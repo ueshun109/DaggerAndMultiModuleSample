@@ -1,6 +1,6 @@
 package com.example.android.api.di
 
-import com.example.android.api.GitHubMyProfileApi
+import com.example.android.api.GithubApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -45,13 +45,13 @@ object GithubApiModule {
     @Provides
     @JvmStatic
     @Singleton
-    fun provideGithubRepo(okHttpClient: OkHttpClient, moshi: Moshi) : GitHubMyProfileApi {
+    fun provideGithubRepo(okHttpClient: OkHttpClient, moshi: Moshi) : GithubApi {
         return Retrofit.Builder()
             .baseUrl("")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
-            .create(GitHubMyProfileApi::class.java)
+            .create(GithubApi::class.java)
     }
 }
 

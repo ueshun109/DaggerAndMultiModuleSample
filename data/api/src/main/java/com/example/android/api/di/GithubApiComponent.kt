@@ -1,13 +1,13 @@
 package com.example.android.api.di
 
-import com.example.android.api.GitHubMyProfileApi
+import com.example.android.api.GithubApi
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [GithubApiModule::class])
 interface GithubApiComponent {
-    fun myProfileApi(): GitHubMyProfileApi
+    fun myProfileApi(): GithubApi
 
     @Component.Factory
     interface Factory {
