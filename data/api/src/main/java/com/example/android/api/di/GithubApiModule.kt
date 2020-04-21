@@ -47,14 +47,10 @@ object GithubApiModule {
     @Singleton
     fun provideGithubRepo(okHttpClient: OkHttpClient, moshi: Moshi) : GithubApi {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://api.github.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
             .create(GithubApi::class.java)
     }
 }
-
-data class Repo(
-    val aaa: String
-)

@@ -31,6 +31,8 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to  listOf("*.jar")))
 
+    implementation(project("path" to ":model"))
+
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
     implementation(Dep.Kotlin.coroutines)
@@ -42,7 +44,6 @@ dependencies {
 
     // Dagger2
     implementation(Dep.Dagger.dagger)
-    implementation(Dep.Dagger.support)
     kapt(Dep.Dagger.compiler)
 
     // Moshi

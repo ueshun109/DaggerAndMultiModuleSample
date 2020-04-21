@@ -21,7 +21,7 @@ class UserFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+//        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
     }
 
 }

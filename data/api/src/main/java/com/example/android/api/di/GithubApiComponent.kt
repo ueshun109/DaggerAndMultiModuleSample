@@ -7,7 +7,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [GithubApiModule::class])
 interface GithubApiComponent {
-    fun myProfileApi(): GithubApi
+    fun githubApi(): GithubApi
 
     @Component.Factory
     interface Factory {
