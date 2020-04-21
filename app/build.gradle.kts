@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
+    implementation(project("path" to ":core"))
     implementation(project("path" to ":feature:repos"))
     implementation(project("path" to ":domain:use_case"))
     implementation(project("path" to ":data:api"))
@@ -41,6 +42,8 @@ dependencies {
     implementation(Dep.AndroidX.appCompat)
     implementation(Dep.AndroidX.coreKtx)
     implementation(Dep.AndroidX.constraintLayout)
+    implementation(Dep.AndroidX.navigation)
+    implementation(Dep.AndroidX.navigationUI)
 
     // Dagger2
     implementation(Dep.Dagger.dagger)

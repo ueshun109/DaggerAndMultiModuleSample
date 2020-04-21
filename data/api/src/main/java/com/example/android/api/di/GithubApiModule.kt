@@ -1,5 +1,6 @@
-package com.example.android.api
+package com.example.android.api.di
 
+import com.example.android.api.GitHubMyProfileApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

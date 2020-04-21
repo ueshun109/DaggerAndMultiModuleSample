@@ -1,7 +1,6 @@
 package com.example.android.api.di
 
 import com.example.android.api.GitHubMyProfileApi
-import com.example.android.api.GithubApiModule
 import dagger.Component
 import javax.inject.Singleton
 
