@@ -30,7 +30,8 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to  listOf("*.jar")))
-    implementation(project("path" to ":data:api"))
+
+    implementation(project("path" to ":data:repository"))
 
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
