@@ -67,6 +67,7 @@ object Dep {
     object Test {
         const val junit4 = "junit:junit:4.12"
         const val assertJ = "org.assertj:assertj-core:3.10.0"
+        const val mockK = "io.mockk:mockk:1.10.0"
         const val mockWebServer = "com.squareup.okhttp3:mockwebserver:4.8.1"
     }
 

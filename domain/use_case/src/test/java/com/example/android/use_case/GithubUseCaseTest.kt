@@ -1,38 +1,89 @@
 package com.example.android.use_case
 
-import com.example.android.api.di.DaggerGithubApiComponent
-import com.example.android.repository.di.DaggerGithubRepositoryComponent
-import com.example.android.use_case.di.DaggerUseCaseComponent
+import com.example.android.core.GithubError
+import com.example.android.repository.GithubRepository
+import io.mockk.*
 import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions
+import okhttp3.MediaType
+import okhttp3.ResponseBody
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import retrofit2.HttpException
+import retrofit2.Response
 
-import org.junit.Before
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class GithubUseCaseTest {
 
-    lateinit var useCaseGet: GetGithubReposUseCase
-
-    @Before
-    fun setUp() {
-        val githubApi = DaggerGithubApiComponent.create().githubApi()
-        val repository = DaggerGithubRepositoryComponent.factory().create(githubApi).githubRepository()
-        useCaseGet = DaggerUseCaseComponent.factory().create(repository).githubReposUseCase()
-    }
+    private var getGithubResponseUseCase: GetGithubReposUseCase = mockk(relaxed = true)
 
     @Test
     fun test() {
-        val target = "certificates"
         runBlocking {
-            val repos = useCaseGet.getRepository()
-            Assertions.assertThat(target)
-                .`as`("")
-                .isEqualTo(repos.first().name)
+            getGithubResponseUseCase.execute()
+            coVerify { getGithubResponseUseCase.execute() }
+            confirmVerified(getGithubResponseUseCase)
+        }
+    }
+
+    @Test
+    fun failure_because_unAuthorize() {
+        val mockRepository = mockk<GithubRepository> {
+            coEvery { myRepos() } throws HttpException(
+                Response.error<Any>(
+                    401,
+                    ResponseBody.create(MediaType.parse("text/plain"), "UnAuthorized Error")
+                )
+            )
+        }
+        getGithubResponseUseCase = GetGithubReposUseCase(mockRepository)
+
+        runBlocking {
+            getGithubResponseUseCase.execute()
+            coVerify { getGithubResponseUseCase.execute() }
+            assertThat(getGithubResponseUseCase.responseState!!)
+                .`as`("UnAuthorize Errorであること")
+                .isEqualTo(GithubError.UnAuthorized)
+        }
+    }
+
+    @Test
+    fun failure_because_forbidden() {
+        val mockRepository = mockk<GithubRepository> {
+            coEvery { myRepos() } throws HttpException(
+                Response.error<Any>(
+                    403,
+                    ResponseBody.create(MediaType.parse("text/plain"), "Forbidden Error")
+                )
+            )
+        }
+        getGithubResponseUseCase = GetGithubReposUseCase(mockRepository)
+
+        runBlocking {
+            getGithubResponseUseCase.execute()
+            coVerify { getGithubResponseUseCase.execute() }
+            assertThat(getGithubResponseUseCase.responseState!!)
+                .`as`("Forbidden Errorであること")
+                .isEqualTo(GithubError.Forbidden)
+        }
+    }
+
+    @Test
+    fun failure_because_internalServerError() {
+        val mockRepository = mockk<GithubRepository> {
+            coEvery { myRepos() } throws HttpException(
+                Response.error<Any>(
+                    500,
+                    ResponseBody.create(MediaType.parse("text/plain"), "Internal Server Error")
+                )
+            )
+        }
+        getGithubResponseUseCase = GetGithubReposUseCase(mockRepository)
+
+        runBlocking {
+            getGithubResponseUseCase.execute()
+            coVerify { getGithubResponseUseCase.execute() }
+            assertThat(getGithubResponseUseCase.responseState!!)
+                .`as`("Internal Server Errorであること")
+                .isEqualTo(GithubError.InternalServerError)
         }
     }
 }

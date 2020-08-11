@@ -15,6 +15,7 @@ import org.junit.After
 import org.junit.Test
 
 import org.junit.Before
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -58,8 +59,19 @@ class GithubApiTest {
             val repos = repository.myRepos()
             assertThat(target)
                 .`as`("取得したリポジトリ一覧の最初のリポジトリ名がcertificatesであること")
-                .isEqualTo(repos.first().name)
+                .isEqualTo(repos.body()!!.first().name)
         }
+    }
+
+    @Test(expected = HttpException::class)
+    fun fetch_myRepos_failure() {
+        val dispatcher: Dispatcher = object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                return MockResponse().setResponseCode(401)
+            }
+        }
+        mockWebServer.dispatcher = dispatcher
+        runBlocking { repository.myRepos() }
     }
 
     @After

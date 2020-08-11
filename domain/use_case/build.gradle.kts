@@ -50,9 +50,13 @@ dependencies {
     implementation(Dep.Dagger.support)
     kapt(Dep.Dagger.compiler)
 
+    // Retrofit
+    implementation(Dep.Retrofit.retrofit)
+
     // Test
     testImplementation(Dep.Test.junit4)
     testImplementation(Dep.Test.assertJ)
+    testImplementation(Dep.Test.mockK)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
