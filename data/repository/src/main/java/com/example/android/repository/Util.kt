@@ -1,4 +1,4 @@
-package com.example.android.repository.di
+package com.example.android.repository
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,7 +11,7 @@ import kotlin.coroutines.resumeWithException
  * Retrofitで定義されている[Call]型の拡張関数
  * コールバックの処理をコルーチンで置き換えたもの
  */
-suspend fun <T> Call<T>.await(): T {
+suspend fun <T> Call<T>.await(): Response<T> {
     return kotlinx.coroutines.suspendCancellableCoroutine { continuation ->
         continuation.invokeOnCancellation {
             cancel()
@@ -20,9 +20,7 @@ suspend fun <T> Call<T>.await(): T {
         enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        continuation.resume(it)
-                    } ?: continuation.resumeWithException(Exception())
+                    continuation.resume(response)
                 } else {
                     continuation.resumeWithException(HttpException(response))
                 }

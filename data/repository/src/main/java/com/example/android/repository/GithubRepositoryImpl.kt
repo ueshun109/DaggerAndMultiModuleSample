@@ -2,9 +2,9 @@ package com.example.android.repository
 
 import com.example.android.api.GithubApi
 import com.example.android.model.entity.Repo
-import com.example.android.repository.di.await
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import javax.inject.Inject
 
 class GithubRepositoryImpl @Inject constructor(
@@ -13,7 +13,7 @@ class GithubRepositoryImpl @Inject constructor(
 
     val yourAccessToken = ""
 
-    override suspend fun myRepos(): List<Repo> = withContext(Dispatchers.IO) {
+    override suspend fun myRepos(): Response<List<Repo>> = withContext(Dispatchers.IO) {
         return@withContext githubApi.fetchMyRepos("token $yourAccessToken").await()
     }
 }

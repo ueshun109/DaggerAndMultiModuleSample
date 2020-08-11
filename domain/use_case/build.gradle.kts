@@ -31,6 +31,7 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to  listOf("*.jar")))
 
+    implementation(project("path" to ":core"))
     implementation(project("path" to ":model"))
     implementation(project("path" to ":data:repository"))
     implementation(project("path" to ":data:api"))
