@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.junit.Before
 
 /**
@@ -17,20 +16,20 @@ import org.junit.Before
  */
 class GithubUseCaseTest {
 
-    lateinit var useCase: GithubReposUseCase
+    lateinit var useCaseGet: GetGithubReposUseCase
 
     @Before
     fun setUp() {
         val githubApi = DaggerGithubApiComponent.create().githubApi()
         val repository = DaggerGithubRepositoryComponent.factory().create(githubApi).githubRepository()
-        useCase = DaggerUseCaseComponent.factory().create(repository).githubReposUseCase()
+        useCaseGet = DaggerUseCaseComponent.factory().create(repository).githubReposUseCase()
     }
 
     @Test
     fun test() {
         val target = "certificates"
         runBlocking {
-            val repos = useCase.getRepository()
+            val repos = useCaseGet.getRepository()
             Assertions.assertThat(target)
                 .`as`("")
                 .isEqualTo(repos.first().name)

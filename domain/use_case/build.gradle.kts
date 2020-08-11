@@ -54,3 +54,11 @@ dependencies {
     testImplementation(Dep.Test.junit4)
     testImplementation(Dep.Test.assertJ)
 }
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
+    kotlinOptions {
+        freeCompilerArgs = listOf(
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.coroutines.FlowPreview")
+    }
+}
