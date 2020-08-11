@@ -2,7 +2,6 @@ package com.example.android.daggerandmultimodulesample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.android.daggerandmultimodulesample.di.DaggerAppComponent
 
 class MainActivity : AppCompatActivity() {
 

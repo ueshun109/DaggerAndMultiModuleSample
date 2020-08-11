@@ -1,9 +1,12 @@
 package com.example.android.daggerandmultimodulesample.di
 
-import com.example.android.repos.UserViewModel
 import dagger.Component
 
-@Component(modules = [GithubApiComponentModule::class])
+@Component
 interface AppComponent {
-    fun inject(viewModel: UserViewModel)
+
+    @Component.Factory
+    interface Factory {
+        fun create(): AppComponent
+    }
 }

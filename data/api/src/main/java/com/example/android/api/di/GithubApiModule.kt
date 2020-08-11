@@ -15,21 +15,21 @@ import javax.inject.Singleton
 object GithubApiModule {
 
     @Singleton
-    @Provides
     @JvmStatic
+    @Provides
     fun provideMoshi(): Moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
 
-    @Provides
     @Singleton
     @JvmStatic
+    @Provides
     fun provideOkHttpLogging(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    @Provides
     @Singleton
     @JvmStatic
+    @Provides
     fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(logging)

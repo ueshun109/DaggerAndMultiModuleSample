@@ -29,6 +29,7 @@ dependencies {
 
     // Retrofit
     implementation(Dep.Retrofit.retrofit)
+    implementation(Dep.Retrofit.converter)
 
     // Test
     testImplementation(Dep.Test.junit4)
