@@ -32,6 +32,7 @@ dependencies {
     implementation(project("path" to ":feature:repos"))
     implementation(project("path" to ":domain:use_case"))
     implementation(project("path" to ":data:api"))
+    implementation(project("path" to ":data:repository"))
 
     // Kotlin
     implementation(Dep.Kotlin.stdLib)
