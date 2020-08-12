@@ -1,18 +1,13 @@
 package com.example.android.daggerandmultimodulesample.di
 
-import android.app.Application
-import android.content.Context
 import com.example.android.daggerandmultimodulesample.App
-import com.example.android.daggerandmultimodulesample.MainActivity
-import com.example.android.use_case.di.UseCaseComponent
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
+    ViewModelModule::class,
     GithubApiComponentModule::class,
     GithubRepositoryComponentModule::class
 ])
