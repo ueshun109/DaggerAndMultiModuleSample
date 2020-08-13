@@ -6,12 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.example.android.repos.di.ProviderRepoListComponent
+import com.example.android.repos.di.RepoListComponent
+import javax.inject.Inject
 
 class RepoListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RepoListFragment()
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var repoListComponent: RepoListComponent
 
     private lateinit var viewModel: RepoListViewModel
 
@@ -19,6 +24,9 @@ class RepoListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        repoListComponent = (activity!!.applicationContext as ProviderRepoListComponent).provideRepoListComponent()
+        repoListComponent.inject(this)
+
         return inflater.inflate(R.layout.fragment_repo_list, container, false)
     }
 
